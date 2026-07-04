@@ -1,6 +1,6 @@
 # AI Agent Governance & Approval Simulator
 
-A small portfolio project that simulates enterprise AI agent governance—validating proposed agent actions against business policies, scoring risk, and routing decisions through human-in-the-loop approval workflows.
+A small portfolio project that simulates enterprise AI agent governance - validating proposed agent actions against business policies, scoring risk, and routing decisions through human-in-the-loop approval workflows.
 
 ## Business Problem
 
@@ -11,23 +11,28 @@ This simulator demonstrates how that pre-execution control plane works: policy c
 ## Architecture
 
 ```text
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐     ┌──────────────┐
-│  actions.csv │────▶│  Pydantic    │────▶│  Policy     │────▶│  Risk        │
-│  (input)     │     │  Validation  │     │  Engine     │     │  Scorer      │
-└─────────────┘     └──────────────┘     └─────────────┘     └──────────────┘
-                                                    │                  │
-                                                    ▼                  ▼
-                                           ┌─────────────────────────────┐
-                                           │  Decision: allowed /        │
-                                           │  blocked / requires_approval│
-                                           └─────────────────────────────┘
-                                                    │
-                    ┌───────────────────────────────┼───────────────────────┐
-                    ▼                               ▼                       ▼
-             ┌─────────────┐                ┌─────────────┐         ┌─────────────┐
-             │ SQLite      │                │ CSV Report  │         │ Markdown    │
-             │ Audit Log   │                │             │         │ Report      │
-             └─────────────┘                └─────────────┘         └─────────────┘
+actions.csv
+   |
+   v
+Pydantic validation
+   |
+   v
+Policy engine
+   |
+   v
+Risk scoring
+   |
+   v
+Approval routing
+   |
+   v
+SQLite audit log
+   |
+   v
+CSV / Markdown reports
+   |
+   v
+Streamlit dashboard
 ```
 
 ### Implemented modules
@@ -46,7 +51,7 @@ This simulator demonstrates how that pre-execution control plane works: policy c
 
 - Load proposed AI agent actions from CSV
 - Validate action data with Pydantic
-- Evaluate actions against documented business policies (POL-001–POL-012)
+- Evaluate actions against documented business policies (POL-001 to POL-012)
 - Calculate risk level (Low / Medium / High / Critical)
 - Decide: **allowed**, **blocked**, or **requires_approval**
 - Determine required approval level (none / team_lead / manager / compliance)
@@ -59,13 +64,13 @@ This simulator demonstrates how that pre-execution control plane works: policy c
 ## Tech Stack
 
 - Python 3.11+
-- Pydantic — data validation
-- SQLite (`sqlite3`) — audit persistence
-- pandas — reporting and CSV handling
-- pytest — automated tests
-- python-dotenv — environment configuration
-- argparse — CLI interface
-- Streamlit — visual dashboard
+- Pydantic - data validation
+- SQLite (`sqlite3`) - audit persistence
+- pandas - reporting and CSV handling
+- pytest - automated tests
+- python-dotenv - environment configuration
+- argparse - CLI interface
+- Streamlit - visual dashboard
 
 ## How to Run
 
@@ -147,4 +152,4 @@ Open the **AI Agent Console** tab for a live 60-second interview demo:
 
 ## Disclaimer
 
-This is a **portfolio / demo project**, not production software. It is designed to demonstrate AI governance concepts—policy-based decision logic, risk scoring, human-in-the-loop approval, and auditability—in a form suitable for technical interviews and Junior AI Solutions Engineer portfolios.
+This is a **portfolio / demo project**, not production software. It is designed to demonstrate AI governance concepts - policy-based decision logic, risk scoring, human-in-the-loop approval, and auditability - in a form suitable for technical interviews and Junior AI Solutions Engineer portfolios.
