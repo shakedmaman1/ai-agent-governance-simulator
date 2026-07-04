@@ -292,7 +292,8 @@ def _render_why_decision_panel(decision: GovernanceDecision) -> None:
 def _render_interview_demo_guide() -> None:
     """Show a step-by-step guide for a 60-second live interview demo."""
     with st.expander("60-second Interview Demo", expanded=False):
-        st.markdown("""
+        st.markdown(
+            """
 Follow these steps in order:
 
 1. Click **Refund $750 for verified VIP customer** to load the preset.
@@ -309,7 +310,8 @@ Follow these steps in order:
 
 **Talking point:** The agent proposed a refund, but the governance layer routed it for
 human approval instead of auto-executing it.
-            """)
+            """
+        )
 
 
 def _save_console_to_audit_log(
@@ -665,7 +667,8 @@ def _render_governance_dashboard(
 def _render_demo_explanation() -> None:
     """Explain the portfolio demo for interview reviewers."""
     st.subheader("Interview Demo Explanation")
-    st.markdown("""
+    st.markdown(
+        """
 This dashboard demonstrates a practical **enterprise AI governance layer** that sits
 between AI agents and operational systems.
 
@@ -678,7 +681,8 @@ between AI agents and operational systems.
 
 Use the sidebar to rerun the workflow, or open **AI Agent Console** to simulate a single
 agent proposal and governance decision live.
-        """)
+        """
+    )
 
 
 def main() -> None:

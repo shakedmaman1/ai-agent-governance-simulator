@@ -119,16 +119,16 @@ After a successful run, the project writes:
 python -m pytest -q
 ```
 
-### Run the Streamlit dashboard
-
-```powershell
-streamlit run app.py
-```
-
-Fallback if `streamlit` is not on your PATH:
+### Run dashboard
 
 ```powershell
 python -m streamlit run app.py
+```
+
+Alternative if `streamlit` is on your PATH:
+
+```powershell
+streamlit run app.py
 ```
 
 The dashboard lets you rerun the governance workflow, explore metrics and charts, filter audit records, review failed cases, and download or preview generated reports.
