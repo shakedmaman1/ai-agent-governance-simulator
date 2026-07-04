@@ -116,6 +116,25 @@ After a successful run, the project writes:
 python -m pytest -q
 ```
 
+### Run the Streamlit dashboard
+
+```powershell
+streamlit run app.py
+```
+
+Fallback if `streamlit` is not on your PATH:
+
+```powershell
+python -m streamlit run app.py
+```
+
+The dashboard lets you rerun the governance workflow, explore metrics and charts, filter audit
+records, review failed cases, and download or preview generated reports.
+
+Open the **AI Agent Console** tab for a live 60-second interview demo: load the $750 VIP refund
+preset, evaluate the action, explain **POL-001** in the **Why this decision?** panel, save to
+the audit log, then switch to **Governance Dashboard** to show reports.
+
 ## Data Notice
 
 **All data in this project is synthetic demo data.** No real customer information, credentials, or production secrets are used. Action records in `data/actions.csv` are fabricated for portfolio demonstration purposes only.

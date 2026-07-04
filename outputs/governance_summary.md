@@ -2,19 +2,19 @@
 
 ## Overview
 
-- **Total actions:** 40
-- **Pass rate:** 67.5%
-- **Average score:** 86.9
-- **Decision accuracy:** 82.5%
-- **Risk-level accuracy:** 82.5%
-- **Approval-level accuracy:** 82.5%
-- **Human review rate:** 70.0%
+- **Total actions:** 36
+- **Pass rate:** 66.7%
+- **Average score:** 85.4
+- **Decision accuracy:** 80.6%
+- **Risk-level accuracy:** 80.6%
+- **Approval-level accuracy:** 80.6%
+- **Human review rate:** 69.4%
 
 ## Decision Distribution
 
-- **Allowed:** 12
-- **Requires approval:** 21
-- **Blocked:** 7
+- **Allowed:** 11
+- **Requires approval:** 20
+- **Blocked:** 5
 
 ## Most Common Failure Reasons
 
@@ -24,16 +24,16 @@
 
 ## Top Policy References Used
 
-- `POL-009`: 13
-- `POL-011`: 8
-- `POL-001`: 4
+- `POL-009`: 12
+- `POL-011`: 7
 - `POL-010`: 4
-- `POL-012`: 4
 - `POL-007`: 4
-- `POL-008`: 4
-- `POL-004`: 3
+- `POL-001`: 3
 - `POL-006`: 3
 - `POL-003`: 3
+- `POL-012`: 3
+- `POL-008`: 3
+- `POL-004`: 2
 
 ## Failed Action Examples
 
