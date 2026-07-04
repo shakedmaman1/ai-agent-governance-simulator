@@ -401,7 +401,7 @@ def _render_agent_console() -> None:
     st.markdown("#### Quick demo presets")
     preset_cols = st.columns(3)
     for index, (preset_key, preset) in enumerate(CONSOLE_PRESETS.items()):
-        if preset_cols[index].button(preset["label"], use_container_width=True):
+        if preset_cols[index].button(preset["label"], width="stretch"):
             _apply_console_preset(preset_key)
             st.session_state.pop("console_result", None)
             st.rerun()
@@ -474,7 +474,7 @@ def _render_agent_console() -> None:
         evaluate_clicked = st.form_submit_button(
             "Evaluate Proposed Agent Action",
             type="primary",
-            use_container_width=True,
+            width="stretch",
         )
 
     if evaluate_clicked:
@@ -516,7 +516,7 @@ def _render_agent_console() -> None:
         if st.button(
             "Save to audit log",
             type="primary",
-            use_container_width=True,
+            width="stretch",
             key="save_console_audit",
         ):
             try:
@@ -602,7 +602,7 @@ def _render_governance_dashboard(
     st.caption("Filter the joined audit records from SQLite.")
     filtered = _apply_filters(dataframe)
     display_columns = [column for column in TABLE_COLUMNS if column in filtered.columns]
-    st.dataframe(filtered[display_columns], use_container_width=True, hide_index=True)
+    st.dataframe(filtered[display_columns], width="stretch", hide_index=True)
     st.caption(f"Showing {len(filtered)} of {len(dataframe)} records.")
 
     st.subheader("Failed Cases")
@@ -634,7 +634,7 @@ def _render_governance_dashboard(
             data=csv_bytes,
             file_name=csv_path.name,
             mime="text/csv",
-            use_container_width=True,
+            width="stretch",
             key="download_csv",
         )
     else:
@@ -647,7 +647,7 @@ def _render_governance_dashboard(
             data=md_bytes,
             file_name=md_path.name,
             mime="text/markdown",
-            use_container_width=True,
+            width="stretch",
             key="download_md",
         )
     else:
@@ -714,7 +714,7 @@ def main() -> None:
         )
 
         if st.button(
-            "Run full governance workflow", type="primary", use_container_width=True
+            "Run full governance workflow", type="primary", width="stretch"
         ):
             limit = None if limit_value == 0 else int(limit_value)
             with st.spinner("Running governance workflow..."):
