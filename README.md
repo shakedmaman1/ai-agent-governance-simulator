@@ -8,7 +8,7 @@ Enterprise companies deploy AI agents to assist support, billing, retention, and
 
 This simulator demonstrates how that pre-execution control plane works: policy checks, risk scoring, approval routing, and full auditability.
 
-## Planned Architecture
+## Architecture
 
 ```
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐     ┌──────────────┐
@@ -30,17 +30,18 @@ This simulator demonstrates how that pre-execution control plane works: policy c
              └─────────────┘                └─────────────┘         └─────────────┘
 ```
 
-**Planned modules (Phase 2+):**
+**Implemented modules:**
 
 | Module | Responsibility |
 |--------|----------------|
-| `schemas.py` | Pydantic models for actions, decisions, and audit records |
-| `evaluator.py` | Policy engine, risk scoring, and approval routing |
-| `db.py` | SQLite audit log with parameterized queries |
+| `schemas.py` | Pydantic models and enums for actions, decisions, and evaluation results |
+| `evaluator.py` | Policy engine, risk scoring, approval routing, and evaluation scoring |
+| `db.py` | SQLite audit logging with parameterized queries |
+| `report.py` | CSV and Markdown report generation |
 | `main.py` | CLI entry point via argparse |
-| `tests/` | pytest coverage for validation, policies, and reporting |
+| `tests/` | pytest coverage for schemas, policies, DB, reports, and CLI |
 
-## Planned Features
+## Features
 
 - Load proposed AI agent actions from CSV
 - Validate action data with Pydantic
@@ -51,7 +52,7 @@ This simulator demonstrates how that pre-execution control plane works: policy c
 - Persist all decisions to SQLite audit logs
 - Generate CSV and Markdown summary reports
 - Run end-to-end from the command line
-- *(Optional, later)* Streamlit dashboard for visual review
+- Automated test suite with pytest
 
 ## Tech Stack
 
@@ -63,18 +64,56 @@ This simulator demonstrates how that pre-execution control plane works: policy c
 - python-dotenv — environment configuration
 - argparse — CLI interface
 
-## Planned CLI Command
+## How to Run
 
-```bash
-python -m src.main evaluate --input data/actions.csv --output outputs/
+### Setup
+
+```powershell
+cd ai-agent-governance-simulator
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+copy .env.example .env
 ```
 
-Additional flags (planned):
+### Run the full workflow
 
-```bash
-python -m src.main evaluate --input data/actions.csv --output outputs/ --verbose
-python -m src.main report --db outputs/audit.db --format csv
-python -m src.main report --db outputs/audit.db --format markdown
+Process all 40 synthetic actions, save audit records, and generate reports:
+
+```powershell
+python -m src.main
+```
+
+### CLI options
+
+```powershell
+# Process a custom input file
+python -m src.main --input data/actions.csv
+
+# Process only the first N actions
+python -m src.main --limit 5
+
+# Print failed action IDs and failure reasons
+python -m src.main --show-failures
+
+# Delete the existing audit database before running
+python -m src.main --reset-db
+```
+
+### Outputs
+
+After a successful run, the project writes:
+
+| Output | Description |
+|--------|-------------|
+| `outputs/governance_audit.db` | SQLite audit log (actions, decisions, evaluations) |
+| `outputs/governance_report.csv` | Joined governance data export |
+| `outputs/governance_summary.md` | Markdown summary with metrics and recommendations |
+
+### Run tests
+
+```powershell
+python -m pytest -q
 ```
 
 ## Data Notice
