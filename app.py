@@ -210,7 +210,9 @@ def _apply_filters(dataframe: pd.DataFrame) -> pd.DataFrame:
         if column not in filtered.columns:
             continue
         options = sorted(filtered[column].dropna().unique().tolist())
-        selected = st.multiselect(label, options=options, default=[], key=f"filter_{column}")
+        selected = st.multiselect(
+            label, options=options, default=[], key=f"filter_{column}"
+        )
         if selected:
             filtered = filtered[filtered[column].isin(selected)]
 
@@ -290,8 +292,7 @@ def _render_why_decision_panel(decision: GovernanceDecision) -> None:
 def _render_interview_demo_guide() -> None:
     """Show a step-by-step guide for a 60-second live interview demo."""
     with st.expander("60-second Interview Demo", expanded=False):
-        st.markdown(
-            """
+        st.markdown("""
 Follow these steps in order:
 
 1. Click **Refund $750 for verified VIP customer** to load the preset.
@@ -308,11 +309,12 @@ Follow these steps in order:
 
 **Talking point:** The agent proposed a refund, but the governance layer routed it for
 human approval instead of auto-executing it.
-            """
-        )
+            """)
 
 
-def _save_console_to_audit_log(action: AgentAction, decision: GovernanceDecision) -> None:
+def _save_console_to_audit_log(
+    action: AgentAction, decision: GovernanceDecision
+) -> None:
     """Persist a console evaluation to SQLite and regenerate reports."""
     evaluation = evaluate_governance_decision(action, decision)
     save_full_run(action, decision, evaluation)
@@ -351,7 +353,9 @@ def _render_console_results(action: AgentAction, decision: GovernanceDecision) -
     metric_cols[0].metric("Decision", decision.decision.value)
     metric_cols[1].metric("Risk level", decision.risk_level.value)
     metric_cols[2].metric("Approval level", decision.approval_level.value)
-    metric_cols[3].metric("Human review", "Yes" if decision.human_review_required else "No")
+    metric_cols[3].metric(
+        "Human review", "Yes" if decision.human_review_required else "No"
+    )
     metric_cols[4].metric("Confidence", f"{decision.confidence:.2f}")
 
     st.markdown("#### Simulated flow")
@@ -590,7 +594,9 @@ def _render_governance_dashboard(
     with chart_cols[1]:
         _distribution_chart(dataframe, "actual_risk_level", "Risk-Level Distribution")
     with chart_cols[2]:
-        _distribution_chart(dataframe, "actual_approval_level", "Approval-Level Distribution")
+        _distribution_chart(
+            dataframe, "actual_approval_level", "Approval-Level Distribution"
+        )
 
     st.subheader("Governance Data")
     st.caption("Filter the joined audit records from SQLite.")
@@ -645,7 +651,9 @@ def _render_governance_dashboard(
             key="download_md",
         )
     else:
-        report_cols[1].warning("Markdown summary not found. Run the workflow to generate it.")
+        report_cols[1].warning(
+            "Markdown summary not found. Run the workflow to generate it."
+        )
 
     if md_path.exists():
         st.markdown("### Summary Preview")
@@ -657,8 +665,7 @@ def _render_governance_dashboard(
 def _render_demo_explanation() -> None:
     """Explain the portfolio demo for interview reviewers."""
     st.subheader("Interview Demo Explanation")
-    st.markdown(
-        """
+    st.markdown("""
 This dashboard demonstrates a practical **enterprise AI governance layer** that sits
 between AI agents and operational systems.
 
@@ -671,8 +678,7 @@ between AI agents and operational systems.
 
 Use the sidebar to rerun the workflow, or open **AI Agent Console** to simulate a single
 agent proposal and governance decision live.
-        """
-    )
+        """)
 
 
 def main() -> None:
@@ -703,9 +709,13 @@ def main() -> None:
             value=0,
             step=1,
         )
-        show_failures = st.checkbox("Show failed evaluations in workflow log", value=False)
+        show_failures = st.checkbox(
+            "Show failed evaluations in workflow log", value=False
+        )
 
-        if st.button("Run full governance workflow", type="primary", use_container_width=True):
+        if st.button(
+            "Run full governance workflow", type="primary", use_container_width=True
+        ):
             limit = None if limit_value == 0 else int(limit_value)
             with st.spinner("Running governance workflow..."):
                 stats = _run_governance_workflow(

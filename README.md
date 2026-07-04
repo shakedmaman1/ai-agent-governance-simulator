@@ -10,7 +10,7 @@ This simulator demonstrates how that pre-execution control plane works: policy c
 
 ## Architecture
 
-```
+```text
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐     ┌──────────────┐
 │  actions.csv │────▶│  Pydantic    │────▶│  Policy     │────▶│  Risk        │
 │  (input)     │     │  Validation  │     │  Engine     │     │  Scorer      │
@@ -30,7 +30,7 @@ This simulator demonstrates how that pre-execution control plane works: policy c
              └─────────────┘                └─────────────┘         └─────────────┘
 ```
 
-**Implemented modules:**
+### Implemented modules
 
 | Module | Responsibility |
 |--------|----------------|
@@ -39,6 +39,7 @@ This simulator demonstrates how that pre-execution control plane works: policy c
 | `db.py` | SQLite audit logging with parameterized queries |
 | `report.py` | CSV and Markdown report generation |
 | `main.py` | CLI entry point via argparse |
+| `app.py` | Streamlit dashboard and AI Agent Console |
 | `tests/` | pytest coverage for schemas, policies, DB, reports, and CLI |
 
 ## Features
@@ -52,6 +53,7 @@ This simulator demonstrates how that pre-execution control plane works: policy c
 - Persist all decisions to SQLite audit logs
 - Generate CSV and Markdown summary reports
 - Run end-to-end from the command line
+- Interactive Streamlit dashboard with AI Agent Console
 - Automated test suite with pytest
 
 ## Tech Stack
@@ -63,6 +65,7 @@ This simulator demonstrates how that pre-execution control plane works: policy c
 - pytest — automated tests
 - python-dotenv — environment configuration
 - argparse — CLI interface
+- Streamlit — visual dashboard
 
 ## How to Run
 
@@ -106,7 +109,7 @@ After a successful run, the project writes:
 
 | Output | Description |
 |--------|-------------|
-| `outputs/governance_audit.db` | SQLite audit log (actions, decisions, evaluations) |
+| `outputs/governance_audit.db` | SQLite audit log generated locally and ignored by git |
 | `outputs/governance_report.csv` | Joined governance data export |
 | `outputs/governance_summary.md` | Markdown summary with metrics and recommendations |
 
@@ -128,12 +131,15 @@ Fallback if `streamlit` is not on your PATH:
 python -m streamlit run app.py
 ```
 
-The dashboard lets you rerun the governance workflow, explore metrics and charts, filter audit
-records, review failed cases, and download or preview generated reports.
+The dashboard lets you rerun the governance workflow, explore metrics and charts, filter audit records, review failed cases, and download or preview generated reports.
 
-Open the **AI Agent Console** tab for a live 60-second interview demo: load the $750 VIP refund
-preset, evaluate the action, explain **POL-001** in the **Why this decision?** panel, save to
-the audit log, then switch to **Governance Dashboard** to show reports.
+Open the **AI Agent Console** tab for a live 60-second interview demo:
+
+1. Load the **$750 VIP refund** preset
+2. Evaluate the action
+3. Explain **POL-001** in the **Why this decision?** panel
+4. Save to the audit log
+5. Switch to **Governance Dashboard** to show reports
 
 ## Data Notice
 
